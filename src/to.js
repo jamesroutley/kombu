@@ -2,7 +2,6 @@
 
 const readline = require('readline');
 const program = require('commander');
-const repl = require('repl');
 const stream = require('stream')
 
 const log = (data) => {
