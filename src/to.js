@@ -3,6 +3,7 @@
 const readline = require('readline');
 const program = require('commander');
 const repl = require('repl');
+const stream = require('stream')
 
 const log = (data) => {
     for (let i = 0; i < data.length; i++) {
@@ -15,6 +16,7 @@ const _cli = (args) => {
         .version('0.1.0')
         .description('to ')
         .option('-f, --func <function>', 'function to run')
+        .arguments('<statement>')
         .action(_runSimpleFunc)
         .parse(args);
 }
@@ -40,10 +42,7 @@ const _readInput = (callback) => {
         data.push(input.trim().split(/\s+/));
     })
     rl.on('close', () => {
-        console.log("hi")
-        repl.start('>> ');
-        setTimeout(() => {}, 3000)
-        // callback(data);
+        callback(data);
     })
 }
 
@@ -52,12 +51,6 @@ const main = () => {
     if (program.func !== undefined) {
         const userFunc = eval(program.func);
         _readInput(userFunc);
-    }
-    if (process.argv.length === 2) {
-        const replFunc = (data) => {
-            repl.start('> ');
-        }
-        _readInput(replFunc);
     }
 }
 
