@@ -1,0 +1,12 @@
+{
+  "name": "to",
+  "version": "0.1.0",
+  "description": "Simplify interacting with CLI data",
+  "main": "index.js",
+  "author": "James Routley",
+  "license": "Apache2",
+  "dependencies": {
+    "commander": "^2.9.0"
+  },
+  "bin": "to.js"
+}
