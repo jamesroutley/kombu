@@ -78,21 +78,14 @@ const _flattenCols = (data) => {
  */
 const _cli = (argv) => {
     var args = parseArgs(argv, {
-        boolean: ['f'],
+        boolean: ['f', 'h'],
         alias: {'function': 'f'}
     })
     if (args._.length !== 1) {
         console.error('Error: statement required');
         process.exit();
     }
-    const statement = args._[0]
-    let userFunc;
-    if (args.f) {
-        userFunc = eval(statement);
-    } else {
-        userFunc = eval(`(data) => ${statement}`)
-    }
-    const stdinData = _readStdIn(userFunc);
+    return args
 }
 
 /**
@@ -136,7 +129,19 @@ const _processData = (tabulatedData) => {
     return data
 }
 
-_cli(process.argv.slice(2));
+const main = () => {
+    const args = _cli(process.argv.slice(2));
+    const statement = args._[0]
+    let userFunc;
+    if (args.f) {
+        userFunc = eval(statement);
+    } else {
+        userFunc = eval(`(data) => ${statement}`)
+    }
+    const stdinData = _readStdIn(userFunc);
+}
+
+main()
 
 // Functions are exported for testing only, and should not be imported.
 module.exports = {
