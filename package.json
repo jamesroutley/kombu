@@ -6,7 +6,13 @@
   "author": "James Routley",
   "license": "Apache2",
   "dependencies": {
-    "commander": "^2.9.0"
+    "minimist": "^1.2.0"
   },
-  "bin": "to.js"
+  "bin": "to.js",
+  "devDependencies": {
+    "jest": "^20.0.4"
+  },
+  "scripts": {
+      "test": "jest src"
+  }
 }
