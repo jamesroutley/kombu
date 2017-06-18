@@ -1,7 +1,7 @@
 {
   "name": "kombu",
   "version": "0.1.0",
-  "description": "A command-line tool for manipulating tablulated data",
+  "description": "A command-line tool for manipulating tabulated data",
   "main": "src/kombu.js",
   "author": "James Routley",
   "license": "Apache-2.0",
