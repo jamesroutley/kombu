@@ -1,18 +1,21 @@
 {
-  "name": "to",
+  "name": "kombu",
   "version": "0.1.0",
-  "description": "Simplify interacting with CLI data",
-  "main": "index.js",
+  "description": "A command-line tool for manipulating tablulated data",
+  "main": "src/kombu.js",
   "author": "James Routley",
-  "license": "Apache2",
+  "license": "Apache-2.0",
   "dependencies": {
     "minimist": "^1.2.0"
   },
-  "bin": "to.js",
+  "bin": {
+    "kombu": "./src/kombu.js"
+  },
   "devDependencies": {
+    "eslint": "^4.0.0",
     "jest": "^20.0.4"
   },
   "scripts": {
-      "test": "jest src"
+    "test": "jest src"
   }
 }

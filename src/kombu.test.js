@@ -1,4 +1,4 @@
-const to = require('./to');
+const kombu = require('./kombu');
 
 test('flattenRows', () => {
     const runs = [
@@ -6,7 +6,7 @@ test('flattenRows', () => {
         {input: [['a', 'b'], ['c']], output: [['a', 'b'], ['c']]}
     ]
     runs.forEach((run) => {
-        expect(to._flattenRows(run.input)).toEqual(run.output);
+        expect(kombu._flattenRows(run.input)).toEqual(run.output);
     })
 });
 
@@ -16,7 +16,7 @@ test('flattenCols', () => {
         {input: [['a', 'b'], ['c']], output: [['a', 'b'], ['c']]}
     ]
     runs.forEach((run) => {
-        expect(to._flattenCols(run.input)).toEqual(run.output);
+        expect(kombu._flattenCols(run.input)).toEqual(run.output);
     })
 })
 
@@ -27,6 +27,6 @@ test('_isTwiceNestedArray', () => {
         {input: [['a'], ['b']], output: true}
     ]
     runs.forEach((run) => {
-        expect(to._isTwiceNestedArray(run.input)).toEqual(run.output);
+        expect(kombu._isTwiceNestedArray(run.input)).toEqual(run.output);
     })
 })
