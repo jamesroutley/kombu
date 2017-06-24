@@ -31,7 +31,7 @@ Filesystem 512-blocks Used Available Capacity iused ifree %iused Mounted on
 devfs 370 370 0 100% 640 0 100% /dev
 ```
 
-Say we want to get a list of File System  names. First, we slice `data` to remove the columb titles (Note kombu can remove titles automatically with the `-t, --title` flag):
+Say we want to get a list of File System  names. First, we slice `data` to remove the columb titles (note kombu can remove titles automatically with the `-t, --title` [flag](#API)):
 
 ```shell
 $ df | kb "data.slice(1)"
