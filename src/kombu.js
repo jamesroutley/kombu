@@ -2,6 +2,29 @@
 
 const parseArgs = require('minimist');
 
+const cliHelp = `Usage: <command> | kombu [options] statement
+
+Kombu is a command-line tool for manipulating tabulated data.
+
+Tabulated data should be piped to kombu, and a statement which transforms the
+data should be supplied. The data is parsed, and made available to the statment
+via the variable 'data'.
+
+Options:
+    -h, --help          Show this message and exit
+`;
+
+const _getExpectedArgKeys = (expectedArgs) => {
+    let expectedArgKeys = Object.keys(expectedArgs);
+    expectedArgKeys = expectedArgKeys.concat(Object.values(expectedArgs));
+    expectedArgKeys.push('_');
+    return expectedArgKeys;
+};
+
+const _getUnexpectedArgKeys = (expectedArgsKeys, args) => (
+    Object.keys(args).filter((key) => !expectedArgsKeys.includes(key))
+);
+
 /**
  * Implements the CLI
  *
@@ -9,11 +32,25 @@ const parseArgs = require('minimist');
  *
  */
 const _cli = (argv) => {
-    var args = parseArgs(argv, {
-        boolean: ['f', 'h'],
-        alias: {'function': 'f'}
+    const expectedArgs = {
+        'h': 'help',
+    };
+    const args = parseArgs(argv, {
+        boolean: ['h'],
+        alias: expectedArgs
     });
+
+    const expectedArgKeys = _getExpectedArgKeys(expectedArgs);
+    const unexpectedKeys = _getUnexpectedArgKeys(expectedArgKeys, args);
+    if (unexpectedKeys.length > 0) {
+        console.error(cliHelp);
+        console.error(
+            `Error: unrecognised flags: ${unexpectedKeys.join(', ')}`);
+        process.exit();
+    }
+
     if (args._.length !== 1) {
+        console.error(cliHelp);
         console.error('Error: statement required');
         process.exit();
     }
@@ -134,12 +171,7 @@ const _processData = (tabulatedData) => {
 const main = () => {
     const args = _cli(process.argv.slice(2));
     const statement = args._[0];
-    let userFunc;
-    if (args.f) {
-        userFunc = eval(statement);
-    } else {
-        userFunc = eval(`(data) => ${statement}`);
-    }
+    const userFunc = eval(`(data) => ${statement}`);
     _readStdIn(userFunc);
 };
 
