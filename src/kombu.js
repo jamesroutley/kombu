@@ -60,6 +60,7 @@ const _flattenRows = (data) => {
  * Transform an array containing one item to that item.
  * If the array has more than one item, or if it isn't an array, return the
  * original object.
+ * [[1, 2]] -> [1, 2]
  *
  * @param {array} data - The array to transform
  */
@@ -125,8 +126,8 @@ const _readStdIn = (callback) => {
 const _processData = (tabulatedData) => {
     let data = tabulatedData.split('\n');
     data = data.map((row) => row.trim().split(/\s+/));
-    data = _flattenCols(data);
     data = _flattenRows(data);
+    data = _flattenCols(data);
     return data;
 };
 
