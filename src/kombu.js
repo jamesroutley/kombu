@@ -12,6 +12,7 @@ via the variable 'data'.
 
 Options:
     -h, --help          Show this message and exit
+    -t, --title         Remove titles, assumed to be at row 0
 `;
 
 const _getExpectedArgKeys = (expectedArgs) => {
@@ -34,9 +35,10 @@ const _getUnexpectedArgKeys = (expectedArgsKeys, args) => (
 const _cli = (argv) => {
     const expectedArgs = {
         'h': 'help',
+        't': 'title',
     };
     const args = parseArgs(argv, {
-        boolean: ['h'],
+        boolean: ['h', 't'],
         alias: expectedArgs
     });
 
@@ -132,7 +134,7 @@ const _flattenCols = (data) => {
  * @param {function} callback - A function to call with the parsed data.
  *
  */
-const _readStdIn = (callback) => {
+const _readStdIn = (callback, removeTitles) => {
     let data = '';
     process.stdin.setEncoding('utf8');
     process.stdin.on('readable', () => {
@@ -144,7 +146,7 @@ const _readStdIn = (callback) => {
 
     process.stdin.on('end', () => {
         data = data.trim();
-        const processedData = _processData(data);
+        const processedData = _processData(data, removeTitles);
         _log(callback(processedData));
     });
 };
@@ -160,8 +162,11 @@ const _readStdIn = (callback) => {
  *  If data is a string, returns the string in an array
  *
  */
-const _processData = (tabulatedData) => {
+const _processData = (tabulatedData, removeTitles) => {
     let data = tabulatedData.split('\n');
+    if (removeTitles) {
+        data = data.slice(1);
+    }
     data = data.map((row) => row.trim().split(/\s+/));
     data = _flattenRows(data);
     data = _flattenCols(data);
@@ -172,7 +177,7 @@ const main = () => {
     const args = _cli(process.argv.slice(2));
     const statement = args._[0];
     const userFunc = eval(`(data) => ${statement}`);
-    _readStdIn(userFunc);
+    _readStdIn(userFunc, args.title);
 };
 
 main();

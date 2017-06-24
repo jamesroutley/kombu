@@ -31,7 +31,7 @@ Filesystem 512-blocks Used Available Capacity iused ifree %iused Mounted on
 devfs 370 370 0 100% 640 0 100% /dev
 ```
 
-Say we want to get a list of File System  names. First, we slice `data` to remove the headings:
+Say we want to get a list of File System  names. First, we slice `data` to remove the columb titles (Note kombu can remove titles automatically with the `-t, --title` flag):
 
 ```shell
 $ df | kb "data.slice(1)"
@@ -71,6 +71,7 @@ via the variable 'data'.
 
 Options:
     -h, --help          Show this message and exit
+    -t, --title         Remove titles, assumed to be at row 0
 ```
 
 ## Alternatives
