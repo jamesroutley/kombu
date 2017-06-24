@@ -76,4 +76,5 @@ Options:
 
 ## Alternatives
 
-- [FuncShell](https://github.com/iostreamer-X/FuncShell), which kombu was inspired by.
+- [awk](https://www.gnu.org/software/gawk/)
+- [FuncShell](https://github.com/iostreamer-X/FuncShell), which kombu was inspired by
