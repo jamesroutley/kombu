@@ -1,6 +1,6 @@
 # Kombu
 
-Kombu simplifies interacting with tabulated CLI data. Pipe the output of a shell command to `kombu`, and apply javascript functions to it.
+Kombu simplifies interacting with tabulated CLI data. Pipe the output of a shell command to `kombu`, and apply javascript functions to it. It's like using `awk`, without having to learn `awk`.
 
 ## Example
 
@@ -47,6 +47,17 @@ $ df | kb "data.slice(1)" | kb "data.map((d) => d[0])"
 devfs
 ```
 
+## IO
+
+Kombu aims to provide an intuitive experience. The type of `data` should be
+what you intuitively expect it to be:
+
+- single strings -> strings
+- 1D lists -> array
+- 2D tables -> nested array
+
+Likewise, output is printed in a sensible format.
+
 ## API
 
 ```
@@ -61,3 +72,7 @@ via the variable 'data'.
 Options:
     -h, --help          Show this message and exit
 ```
+
+## Alternatives
+
+- [FuncShell](https://github.com/iostreamer-X/FuncShell), which kombu was inspired by.
