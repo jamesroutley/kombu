@@ -3,6 +3,24 @@
 const parseArgs = require('minimist');
 
 /**
+ * Implements the CLI
+ *
+ * @param {Array} argv - An array of user-supplied arguments.
+ *
+ */
+const _cli = (argv) => {
+    var args = parseArgs(argv, {
+        boolean: ['f', 'h'],
+        alias: {'function': 'f'}
+    });
+    if (args._.length !== 1) {
+        console.error('Error: statement required');
+        process.exit();
+    }
+    return args;
+};
+
+/**
  * Formats and prints data.
  *
  * @param {array} data - The data to print.
@@ -69,24 +87,6 @@ const _flattenCols = (data) => {
         return data[0];
     }
     return data;
-};
-
-/**
- * Implements the CLI
- *
- * @param {Array} argv - An array of user-supplied arguments.
- *
- */
-const _cli = (argv) => {
-    var args = parseArgs(argv, {
-        boolean: ['f', 'h'],
-        alias: {'function': 'f'}
-    });
-    if (args._.length !== 1) {
-        console.error('Error: statement required');
-        process.exit();
-    }
-    return args;
 };
 
 /**
