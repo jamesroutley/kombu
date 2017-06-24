@@ -74,6 +74,14 @@ Options:
     -t, --title         Remove titles, assumed to be at row 0
 ```
 
+## Install
+
+With `npm`:
+
+```
+$ npm install -g kombu
+```
+
 ## Alternatives
 
 - [awk](https://www.gnu.org/software/gawk/)
