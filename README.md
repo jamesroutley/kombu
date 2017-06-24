@@ -4,6 +4,15 @@ Kombu simplifies interacting with tabulated CLI data. Pipe the output of a shell
 
 ## Example
 
+```shell
+ls | kb "data.map((n) => n.concat(' ✨'))"
+README.md ✨
+node_modules ✨
+package.json ✨
+src ✨
+yarn.lock ✨
+```
+
 Many shell commands output tabulated data:
 
 ```shell
@@ -36,4 +45,19 @@ Then, we apply a `map` to the array to select the first element of each row:
 $ df | kb "data.slice(1)" | kb "data.map((d) => d[0])"
 /dev/disk1
 devfs
+```
+
+## API
+
+```
+Usage: <command> | kombu [options] statement
+
+Kombu is a command-line tool for manipulating tabulated data.
+
+Tabulated data should be piped to kombu, and a statement which transforms the
+data should be supplied. The data is parsed, and made available to the statment
+via the variable 'data'.
+
+Options:
+    -h, --help          Show this message and exit
 ```
