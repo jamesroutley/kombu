@@ -9,6 +9,9 @@ const parseArgs = require('minimist');
  *
  */
 const _log = (data) => {
+    if (typeof data === 'undefined') {
+        return;
+    }
     if (_isTwiceNestedArray(data)) {
         console.log(data.map((i) => i.join(' ')).join('\n'));
     } else if (data.constructor === Array) {
@@ -102,6 +105,7 @@ const _readStdIn = (callback) => {
     });
 
     process.stdin.on('end', () => {
+        data = data.trim();
         const processedData = _processData(data);
         _log(callback(processedData));
     });
