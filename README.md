@@ -74,7 +74,7 @@ Options:
     -t, --title         Remove titles, assumed to be at row 0
 ```
 
-## Install
+## Install
 
 With `npm`:
 
